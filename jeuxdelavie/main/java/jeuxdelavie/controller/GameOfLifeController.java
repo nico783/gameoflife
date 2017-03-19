@@ -13,13 +13,6 @@ import jeuxdelavie.cellule.GameOfLifeCellule;
 
 public class GameOfLifeController implements Controller {
 
-	/**
-	 * Durée en milliseconde entre chaque pas d'évolution.
-	 */
-	protected static final long TIME_BETWEEN_STEP = 500;
-
-	private boolean continuer;
-
 	private Cloner cloner = new Cloner();
 
 	@Override
@@ -28,23 +21,13 @@ public class GameOfLifeController implements Controller {
 	}
 
 	@Override
-	public void faireEvoluer(Model model, View vue) throws InterruptedException {
-
-		continuer = true;
-		while (continuer) {
-
-			Model modelInitial = cloner.deepClone(model);
-
-			for (int i = 0; i < modelInitial.getNombreLignes(); i++) {
-				for (int j = 0; j < modelInitial.getNombreColonnes(); j++) {
-					faireEvoluer(model.getCellule(i, j), modelInitial);
-					System.out.println("Traitement de la cellule (" + i + ", " + j + ")");
-				}
+	public void faireEvoluer(Model model) {
+		Model modelInitial = cloner.deepClone(model);
+		for (int i = 0; i < modelInitial.getNombreLignes(); i++) {
+			for (int j = 0; j < modelInitial.getNombreColonnes(); j++) {
+				faireEvoluer(model.getCellule(i, j), modelInitial);
+				System.out.println("Traitement de la cellule (" + i + ", " + j + ")");
 			}
-			vue.update();
-			Thread.sleep(TIME_BETWEEN_STEP);
-			// continuer = false;
-			// vue.activerGo();
 		}
 	}
 
@@ -109,11 +92,6 @@ public class GameOfLifeController implements Controller {
 		}
 
 		return voisines;
-	}
-
-	@Override
-	public void stop() {
-		continuer = false;
 	}
 
 	@Override

@@ -25,6 +25,7 @@ public class View {
 
 	private JButton buttonGo;
 	private JButton buttonStop;
+	private Boolean continuer;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -59,7 +60,7 @@ public class View {
 		buttonGo.addActionListener(new GoActionListener(controller, model, this));
 
 		buttonStop = new JButton("STOP");
-		buttonStop.addActionListener(new StopActionListener(controller, this));
+		buttonStop.addActionListener(new StopActionListener(this));
 
 		JPanel panneauButton = new JPanel();
 		panneauButton.add(buttonGo);
@@ -163,6 +164,14 @@ public class View {
 			// Pas d'implementation
 		}
 
+	}
+
+	public void setContinuer(boolean continuer) {
+		this.continuer = continuer;
+	}
+
+	public boolean isContinuer() {
+		return continuer;
 	}
 
 }

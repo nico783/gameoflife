@@ -8,9 +8,7 @@ public interface Controller {
 
 	void change(Cellule cellule);
 
-	void faireEvoluer(Model model, View vue) throws InterruptedException;
-
-	void stop();
+	void faireEvoluer(Model model);
 
 	String getDescription();
 
